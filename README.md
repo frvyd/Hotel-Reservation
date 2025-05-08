@@ -1,6 +1,6 @@
-# Celestial Resort Otel Rezervasyon Sistemi
+# Otel Rezervasyon Sistemi
 
-Celestial Resort Otel Rezervasyon Sistemi, kullanıcıların otel odalarını görüntülemesine, rezervasyon yapmasına ve adminlerin oda ve rezervasyonları yönetmesine olanak tanıyan bir web uygulamasıdır. Sistem, basit ve kullanıcı dostu bir arayüzle, hem müşteriler hem de otel yöneticileri için işlevsel bir deneyim sunar.
+Otel Rezervasyon Sistemi, kullanıcıların otel odalarını görüntülemesine, rezervasyon yapmasına ve adminlerin oda ve rezervasyonları yönetmesine olanak tanıyan bir web uygulamasıdır. Sistem, basit ve kullanıcı dostu bir arayüzle, hem müşteriler hem de otel yöneticileri için işlevsel bir deneyim sunar.
 
 ## Özellikler
 - **Kullanıcı İşlevleri**:
