@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Celestial Resort Otel - Yönetim Paneli</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body onload="checkUserLogin()">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container mx-auto flex justify-between items-center">
+      <div class="flex items-center">
+        <img src="images/logo.png" alt="Celestial Resort Otel Logo" class="navbar-logo h-20 mr-4">
+        <h1 class="text-2xl font-bold text-white">Celestial Resort Otel</h1>
+      </div>
+      <div id="navUser" class="flex items-center">
+        <!-- Kullanıcı durumu burada dinamik olarak güncellenecek -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- Admin Panel -->
+  <section class="container mx-auto my-8">
+    <h2 class="text-3xl font-bold mb-4">Yönetim Paneli</h2>
+    <!-- Current Room Info (for editing) -->
+    <div id="currentRoomInfo" class="bg-white p-6 rounded shadow mb-8 hidden">
+      <h3 class="text-xl font-bold mb-4">Mevcut Oda Bilgileri</h3>
+      <p><strong>Oda Adı:</strong> <span id="currentRoomName"></span></p>
+      <p><strong>Fiyat (Gece):</strong> <span id="currentRoomPrice"></span> TL</p>
+      <p><strong>Kişi Sayısı:</strong> <span id="currentRoomCapacity"></span></p>
+      <p><strong>Açıklama:</strong> <span id="currentRoomDescription"></span></p>
+      <p><strong>Görsel:</strong></p>
+      <img id="currentRoomImage" class="w-32 h-32 object-cover mt-2" alt="Mevcut Oda Görseli">
+    </div>
+    <!-- Add/Edit Room -->
+    <div class="bg-white p-6 rounded shadow mb-8">
+      <h3 class="text-xl font-bold mb-4">Oda Ekle/Düzenle</h3>
+      <form id="roomForm">
+        <input type="hidden" id="roomId">
+        <div class="mb-4">
+          <label class="block mb-1">Oda Adı:</label>
+          <input type="text" id="roomName" class="border p-2 w-full">
+        </div>
+        <div class="mb-4">
+          <label class="block mb-1">Fiyat (Gece):</label>
+          <input type="number" id="roomPrice" class="border p-2 w-full">
+        </div>
+        <div class="mb-4">
+          <label class="block mb-1">Kişi Sayısı:</label>
+          <input type="number" id="roomCapacity" class="border p-2 w-full">
+        </div>
+        <div class="mb-4">
+          <label class="block mb-1">Açıklama:</label>
+          <textarea id="roomDescription" class="border p-2 w-full"></textarea>
+        </div>
+        <div class="mb-4">
+          <label class="block mb-1">Oda Görseli:</label>
+          <input type="file" id="roomImage" accept="image/*" class="border p-2 w-full">
+          <img id="imagePreview" class="hidden w-32 h-32 object-cover mt-2" alt="Yeni Görsel Önizleme">
+        </div>
+        <button type="button" onclick="saveRoom()" class="btn-primary mr-2">Kaydet</button>
+        <button type="button" onclick="resetRoomForm()" class="btn-primary">Sıfırla</button>
+      </form>
+    </div>
+    <!-- Reservation List -->
+    <div class="bg-white p-6 rounded shadow">
+      <h3 class="text-xl font-bold mb-4">Kullanıcı Rezervasyonları</h3>
+      <div id="reservationList"></div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container mx-auto">
+      <p>© 2025 Celestial Resort Otel. Tüm hakları saklıdır.</p>
+    </div>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

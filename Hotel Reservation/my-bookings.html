@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Celestial Resort Otel - Rezervasyonlarım</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body onload="checkUserLogin()">
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="container mx-auto flex justify-between items-center">
+      <div class="flex items-center">
+        <img src="images/logo.png" alt="Celestial Resort Otel Logo" class="navbar-logo h-20 mr-4">
+        <h1 class="text-2xl font-bold text-white">Celestial Resort Otel</h1>
+      </div>
+      <div id="navUser" class="flex items-center">
+        <!-- Kullanıcı durumu burada dinamik olarak güncellenecek -->
+      </div>
+    </div>
+  </nav>
+
+  <!-- My Bookings -->
+  <section class="container mx-auto my-8">
+    <h2 class="text-3xl font-bold mb-4">Rezervasyonlarım</h2>
+    <div id="bookingList" class="grid grid-cols-1 gap-4"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container mx-auto">
+      <p>© 2025 Celestial Resort Otel. Tüm hakları saklıdır.</p>
+    </div>
+  </footer>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
