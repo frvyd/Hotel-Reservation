@@ -1,44 +1,548 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Celestial Resort Otel - Ana Sayfa</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celestial Resort Otel - Ana Sayfa</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #8B4F8A;
+            --secondary-color: #A68B8F;
+            --text-color: #4A4446;
+            --background-color: #FAF8F5;
+            --light-bg: #F5F2EF;
+            --danger-color: #B87D7D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #F8F6F3 0%, #F2EFE8 50%, #EDE8DD 100%);
+            min-height: 100vh;
+        }
+
+        .glass {
+            background: rgba(250, 248, 245, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 79, 138, 0.2);
+        }
+
+        .glass-dark {
+            background: rgba(139, 79, 138, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(250, 248, 245, 0.3);
+        }
+
+        .glass-card {
+            background: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 79, 138, 0.15);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hover-glow:hover {
+            box-shadow: 0 20px 40px rgba(139, 79, 138, 0.3);
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, rgba(248, 246, 243, 0.95) 0%, rgba(242, 239, 232, 0.9) 50%, rgba(237, 232, 221, 0.95) 100%),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%"><stop offset="0%" stop-color="%238B4F8A" stop-opacity="0.1"/><stop offset="100%" stop-color="%23A68B8F" stop-opacity="0.05"/></radialGradient></defs><rect width="100%" height="100%" fill="url(%23a)"/></svg>');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .btn-modern {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--background-color);
+            padding: 12px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(139, 79, 138, 0.3);
+            border: none;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .btn-modern:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(139, 79, 138, 0.4);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--danger-color) 0%, var(--secondary-color) 100%);
+            color: var(--background-color);
+            padding: 12px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(184, 125, 125, 0.3);
+            border: none;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(184, 125, 125, 0.4);
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--background-color);
+            padding: 10px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(139, 79, 138, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(139, 79, 138, 0.4);
+            color: var(--background-color);
+        }
+
+        .btn-logout {
+            background: linear-gradient(135deg, var(--danger-color) 0%, var(--secondary-color) 100%);
+            color: var(--background-color);
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(184, 125, 125, 0.3);
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .btn-logout:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(184, 125, 125, 0.4);
+            color: var(--background-color);
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: rgba(139, 79, 138, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            background: rgba(250, 248, 245, 0.15);
+            padding: 8px 16px;
+            border-radius: 25px;
+            border: 1px solid rgba(139, 79, 138, 0.3);
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--background-color);
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .user-name {
+            color: var(--background-color);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .feature-card {
+            background: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(139, 79, 138, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(139, 79, 138, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(139, 79, 138, 0.15);
+        }
+
+        .room-card {
+            background: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(139, 79, 138, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(139, 79, 138, 0.1);
+        }
+
+        .room-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(139, 79, 138, 0.15);
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(139, 79, 138, 0.3);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: particle-float 8s infinite linear;
+        }
+
+        @keyframes particle-float {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) scale(0);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) scale(1);
+            }
+        }
+
+        .booking-card {
+            background: rgba(250, 248, 245, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 79, 138, 0.2);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .booking-card:hover {
+            background: rgba(250, 248, 245, 0.9);
+            transform: translateX(5px);
+        }
+
+        /* Custom input and form styles */
+        input, select, textarea {
+            background-color: var(--background-color) !important;
+            color: var(--text-color) !important;
+            border-color: var(--secondary-color) !important;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--primary-color) !important;
+            box-shadow: 0 0 0 2px rgba(139, 79, 138, 0.3) !important;
+        }
+
+        /* Text colors */
+        .text-primary {
+            color: var(--primary-color);
+        }
+
+        .text-secondary {
+            color: var(--secondary-color);
+        }
+
+        .text-main {
+            color: var(--text-color);
+        }
+
+        .text-light {
+            color: var(--background-color);
+        }
+
+        .text-hero {
+            color: var(--text-color);
+        }
+
+        /* Button Container */
+        .button-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .button-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-modern, .btn-secondary {
+                margin: 5px 0;
+                width: auto;
+            }
+
+            .user-info {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .btn-logout {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="container mx-auto flex justify-between items-center">
-      <div class="flex items-center">
-        <img src="images/logo.png" alt="Celestial Resort Otel Logo" class="navbar-logo h-20 mr-4">
-        <h1 class="text-2xl font-bold text-white">Celestial Resort Otel</h1>
-      </div>
-      <div id="navUser" class="flex items-center">
-        <!-- Kullanıcı durumu burada dinamik olarak güncellenecek -->
-      </div>
-    </div>
-  </nav>
+    <!-- Floating Particles -->
+    <div id="particles" class="fixed inset-0 overflow-hidden pointer-events-none z-0"></div>
 
-  <!-- Hero Section -->
-  <section class="bg-cover bg-center h-96" style="background-image: url('https://via.placeholder.com/1200x400')">
-    <div class="container mx-auto h-full flex items-center justify-center">
-      <div class="text-center text-black">
-        <h2 class="text-4xl font-bold mb-4">Celestial Resort Otel'e Hoş Geldiniz</h2>
-        <p class="text-lg mb-6">Konforlu odalarımızla unutulmaz bir konaklama deneyimi yaşayın.</p>
-        <a href="rooms.html" class="btn-primary">Odaları Gör</a>
-      </div>
-    </div>
-  </section>
+    <!-- Navbar -->
+    <nav class="glass-dark fixed w-full z-50 py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center space-x-4">
+                <div class="w-12 h-12 bg-gradient-to-br from-primary-color to-secondary-color rounded-full flex items-center justify-center animate-float" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));">
+                    <span class="text-light font-bold text-xl">C</span>
+                </div>
+                <h1 class="text-2xl font-bold text-main">Celestial Resort</h1>
+            </div>
+            <div class="flex items-center space-x-4" id="navUserArea">
+                <!-- Bu alan JavaScript ile dinamik olarak güncellenecek -->
+                <a href="login.html" class="btn-login">
+                    👤 Giriş Yap / Kayıt Ol
+                </a>
+            </div>
+        </div>
+    </nav>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container mx-auto">
-      <p>© 2025 Celestial Resort Otel. Tüm hakları saklıdır.</p>
-    </div>
-  </footer>
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="glass-card rounded-3xl p-12 max-w-4xl mx-auto hover-glow">
+                <h2 class="text-6xl font-bold text-hero mb-6 animate-float" id="heroTitle">
+                    Celestial Resort'a 
+                    <span class="block mt-2 gradient-text">
+                        Hoş Geldiniz
+                    </span>
+                </h2>
+                <p class="text-xl mb-8 leading-relaxed text-main opacity-80" id="heroSubtitle">
+                    Bulutlarda yaşar gibi hissettiren lüks odalarımızda, 
+                    <br>unutulmaz bir konaklama deneyimi sizi bekliyor.
+                </p>
+                <div class="button-container">
+                    <a href="rooms.html" class="btn-modern">
+                        🏨 Odaları Keşfet
+                    </a>
+                    <a href="booking.html" class="btn-secondary">
+                        📅 Rezervasyon Yap
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-20 left-10 w-20 h-20 rounded-full opacity-30 animate-float" style="background-color: rgba(139, 79, 138, 0.2);"></div>
+        <div class="absolute bottom-20 right-10 w-16 h-16 rounded-full opacity-30 animate-float" style="background-color: rgba(166, 139, 143, 0.2); animation-delay: -2s;"></div>
+        <div class="absolute top-1/2 left-1/4 w-12 h-12 rounded-full opacity-30 animate-float" style="background-color: rgba(184, 125, 125, 0.2); animation-delay: -4s;"></div>
+    </section>
 
-  <script src="scripts.js"></script>
+    <!-- Features Section -->
+    <section class="py-20 relative">
+        <div class="container mx-auto px-6">
+            <h3 class="text-4xl font-bold text-center text-main mb-16">
+                Neden <span class="gradient-text">Celestial Resort?</span>
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="feature-card hover-glow">
+                    <div class="text-4xl mb-4">🌟</div>
+                    <h4 class="text-xl font-bold mb-3 text-main">Lüks Konfor</h4>
+                    <p class="text-main">En modern amenities ile donatılmış odalarımızda size layık konforu yaşayın.</p>
+                </div>
+                <div class="feature-card hover-glow" style="animation-delay: 0.2s;">
+                    <div class="text-4xl mb-4">🏞️</div>
+                    <h4 class="text-xl font-bold mb-3 text-main">Muhteşem Manzara</h4>
+                    <p class="text-main">Doğanın büyüleyici güzelliğini pencerelerinizden izleyin.</p>
+                </div>
+                <div class="feature-card hover-glow" style="animation-delay: 0.4s;">
+                    <div class="text-4xl mb-4">🎯</div>
+                    <h4 class="text-xl font-bold mb-3 text-main">Mükemmel Hizmet</h4>
+                    <p class="text-main">7/24 profesyonel ekibimiz sizin için burada.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="glass-dark py-8 mt-20">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-main opacity-80">© 2025 Celestial Resort Otel. Tüm hakları saklıdır.</p>
+            <p class="text-main opacity-60 text-sm mt-2">Designed with ❤️ for unforgettable experiences</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentUser = null;
+
+        // Particle animation
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + 'vw';
+            particle.style.width = particle.style.height = Math.random() * 10 + 5 + 'px';
+            particle.style.animationDuration = Math.random() * 3 + 2 + 's';
+            document.getElementById('particles').appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 5000);
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 300);
+
+        // Create initial particles
+        for (let i = 0; i < 20; i++) {
+            setTimeout(createParticle, i * 100);
+        }
+
+        // Check for user data in URL parameters
+        function checkUserLogin() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const userData = urlParams.get('user');
+            
+            if (userData) {
+                try {
+                    currentUser = JSON.parse(atob(userData));
+                    updateNavigation();
+                    updateHeroSection();
+                    // Clean URL
+                    window.history.replaceState({}, document.title, window.location.pathname);
+                } catch (error) {
+                    console.error('Invalid user data');
+                }
+            }
+        }
+
+        // Update navigation based on user status
+        function updateNavigation() {
+            const navUserArea = document.getElementById('navUserArea');
+            
+            if (currentUser) {
+                const firstLetter = currentUser.name.charAt(0).toUpperCase();
+                navUserArea.innerHTML = `
+                    <div class="user-info">
+                        <div class="user-avatar">${firstLetter}</div>
+                        <span class="user-name">Hoş geldiniz, ${currentUser.name.split(' ')[0]}</span>
+                        <button onclick="logout()" class="btn-logout">
+                            🚪 Çıkış
+                        </button>
+                    </div>
+                `;
+            } else {
+                navUserArea.innerHTML = `
+                    <a href="login.html" class="btn-login">
+                        👤 Giriş Yap / Kayıt Ol
+                    </a>
+                `;
+            }
+        }
+
+        // Update hero section for logged in users
+        function updateHeroSection() {
+            if (currentUser) {
+                const heroTitle = document.getElementById('heroTitle');
+                const heroSubtitle = document.getElementById('heroSubtitle');
+                
+                const firstName = currentUser.name.split(' ')[0];
+                
+                heroTitle.innerHTML = `
+                    Hoş Geldiniz 
+                    <span class="block mt-2 gradient-text">
+                        ${firstName}!
+                    </span>
+                `;
+                
+                heroSubtitle.innerHTML = `
+                    Celestial Resort'ta size özel hazırlanmış lüks deneyimler sizi bekliyor.
+                    <br>Unutulmaz anılar yaratmaya hazır mısınız?
+                `;
+            }
+        }
+
+        // Logout function
+        function logout() {
+            if (confirm('Çıkış yapmak istediğinize emin misiniz?')) {
+                currentUser = null;
+                updateNavigation();
+                
+                // Reset hero section
+                const heroTitle = document.getElementById('heroTitle');
+                const heroSubtitle = document.getElementById('heroSubtitle');
+                
+                heroTitle.innerHTML = `
+                    Celestial Resort'a 
+                    <span class="block mt-2 gradient-text">
+                        Hoş Geldiniz
+                    </span>
+                `;
+                
+                heroSubtitle.innerHTML = `
+                    Bulutlarda yaşar gibi hissettiren lüks odalarımızda, 
+                    <br>unutulmaz bir konaklama deneyimi sizi bekliyor.
+                `;
+                
+                // Show logout message
+                alert('Başarıyla çıkış yaptınız. Tekrar görüşmek üzere!');
+            }
+        }
+
+        // Initialize page
+        window.addEventListener('load', function() {
+            checkUserLogin();
+        });
+    </script>
 </body>
 </html>
