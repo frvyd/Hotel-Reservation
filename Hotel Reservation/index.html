@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         :root {
-            --primary-color: #8B4F8A;
+            --primary-color: #50364f;
             --secondary-color: #A68B8F;
             --text-color: #4A4446;
             --background-color: #FAF8F5;
@@ -27,11 +27,7 @@
             background-position: center; /* Centers the image */
             background-repeat: no-repeat; /* Preventsprinciple Prevents tiling */
             background-attachment: fixed; /* Optional: Fixed background for parallax effect */
-            min-height: 100vh;
-            color: var(--text-color);   
-            font-family: 'Arial', sans-serif;   
-            line-height: 1.6;   
-            overflow-x: hidden; /* Prevents horizontal scroll */    
+              
             }
             
         .container {
@@ -81,10 +77,19 @@
         }
 
         .gradient-text {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            color: var(--primary-color); /* #4A4446 - koyu gri */
+            -webkit-background-clip: initial;
+            -webkit-text-fill-color: initial;
+            background-clip: initial;
+            text-shadow: 
+                2px 0 4px rgba(255, 255, 255, 0.8),  /* Sağ */
+                -2px 0 4px rgba(255, 255, 255, 0.8), /* Sol */
+                0 2px 4px rgba(255, 255, 255, 0.8),  /* Aşağı */
+                0 -2px 4px rgba(255, 255, 255, 0.8); /* Yukarı */
+            padding: 3px 6px;
+            border-radius: 4px;
+            display: inline-block;
+            font-weight: bold;
         }
 
         .hover-glow:hover {
@@ -379,10 +384,7 @@
     <nav class="glass-dark fixed w-full z-50 py-4">
         <div class="container mx-auto px-6 flex justify-between items-center">
             <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 bg-gradient-to-br from-primary-color to-secondary-color rounded-full flex items-center justify-center animate-float" style="background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));">
-                    <span class="text-light font-bold text-xl">C</span>
-                </div>
-                <h1 class="text-2xl font-bold text-main">Celestial Resort</h1>
+                <img src="images/logo.png" alt="Celestial Resort Otel Logo" class="navbar-logo h-20 mr-4">
             </div>
             <div class="flex items-center space-x-4" id="navUserArea">
                 <!-- Bu alan JavaScript ile dinamik olarak güncellenecek -->
@@ -428,7 +430,7 @@
     <section class="py-20 relative">
         <div class="container mx-auto px-6">
             <h3 class="text-4xl font-bold text-center text-main mb-16">
-                Neden <span class="gradient-text">Celestial Resort?</span>
+                <span class="gradient-text">Neden Celestial Resort?</span>
             </h3>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="feature-card hover-glow">
@@ -453,8 +455,8 @@
     <!-- Footer -->
     <footer class="glass-dark py-8 mt-20">
         <div class="container mx-auto px-6 text-center">
-            <p class="text-main opacity-80">© 2025 Celestial Resort Otel. Tüm hakları saklıdır.</p>
-            <p class="text-main opacity-60 text-sm mt-2">Designed with ❤️ for unforgettable experiences</p>
+            <p style="color: rgb(0, 0, 0);">© 2025 Celestial Resort Otel. Tüm hakları saklıdır.</p>
+            <p class="text-sm mt-2" style="color: rgb(0, 0, 0);">Designed with ❤️ for unforgettable experiences</p>
         </div>
     </footer>
 
