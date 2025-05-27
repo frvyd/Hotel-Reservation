@@ -1,83 +1,1170 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Celestial Resort Otel - Yönetim Paneli</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celestial Resort - Admin Paneli</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary-color: #50364f;
+            --secondary-color: #A68B8F;
+            --text-color: #4A4446;
+            --background-color: #FAF8F5;
+            --light-bg: #F5F2EF;
+            --danger-color: #B87D7D;
+            --success-color: #7DB87D;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url('images/bgimg.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .glass {
+            background: rgba(250, 248, 245, 0.9);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(139, 79, 138, 0.1);
+            border: 1px solid rgba(139, 79, 138, 0.2);
+        }
+
+        .glass-dark {
+            background: rgba(139, 79, 138, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(250, 248, 245, 0.3);
+        }
+
+        .sidebar-glass {
+            background: rgba(80, 54, 79, 0.95);
+            backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(250, 248, 245, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: var(--background-color);
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(139, 79, 138, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(139, 79, 138, 0.4);
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, var(--success-color) 0%, #5A9A5A 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 12px;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(125, 184, 125, 0.4);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, var(--danger-color) 0%, #A66666 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 12px;
+        }
+
+        .btn-danger:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(184, 125, 125, 0.4);
+        }
+
+        .btn-edit {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #8F7A7E 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 12px;
+        }
+
+        .btn-edit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(166, 139, 143, 0.4);
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: var(--background-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            margin: 5px 10px;
+            font-weight: 500;
+        }
+
+        .sidebar-item:hover, .sidebar-item.active {
+            background: rgba(250, 248, 245, 0.2);
+            transform: translateX(5px);
+        }
+
+        .sidebar-item i {
+            margin-right: 12px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .card {
+            background: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 15px 35px rgba(139, 79, 138, 0.1);
+            border: 1px solid rgba(139, 79, 138, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 45px rgba(139, 79, 138, 0.15);
+        }
+
+        .stats-card {
+            background: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(139, 79, 138, 0.1);
+            border: 1px solid rgba(139, 79, 138, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .stats-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(139, 79, 138, 0.15);
+        }
+
+        .table-container {
+            background: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(139, 79, 138, 0.1);
+            border: 1px solid rgba(139, 79, 138, 0.1);
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th {
+            background: rgba(80, 54, 79, 0.1);
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            color: var(--primary-color);
+            border-bottom: 1px solid rgba(139, 79, 138, 0.2);
+        }
+
+        .table td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(139, 79, 138, 0.1);
+            color: var(--text-color);
+        }
+
+        .table tr:hover {
+            background: rgba(139, 79, 138, 0.05);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: rgba(250, 248, 245, 0.98);
+            backdrop-filter: blur(30px);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 25px 60px rgba(139, 79, 138, 0.2);
+            border: 1px solid rgba(139, 79, 138, 0.2);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid rgba(139, 79, 138, 0.2);
+            border-radius: 10px;
+            background: rgba(250, 248, 245, 0.8);
+            color: var(--text-color);
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(139, 79, 138, 0.2);
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-pending {
+            background: rgba(255, 193, 7, 0.2);
+            color: #856404;
+        }
+
+        .status-confirmed {
+            background: rgba(125, 184, 125, 0.2);
+            color: #155724;
+        }
+
+        .status-cancelled {
+            background: rgba(184, 125, 125, 0.2);
+            color: #721c24;
+        }
+
+        .room-image {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                transform: translateX(-100%);
+                position: fixed;
+                z-index: 999;
+                height: 100vh;
+            }
+            
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .admin-header {
+            background: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(139, 79, 138, 0.1);
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </head>
-<body onload="checkUserLogin()">
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="container mx-auto flex justify-between items-center">
-      <div class="flex items-center">
-        <img src="images/logo.png" alt="Celestial Resort Otel Logo" class="navbar-logo h-20 mr-4">
-        <h1 class="text-2xl font-bold text-white">Celestial Resort Otel</h1>
-      </div>
-      <div id="navUser" class="flex items-center">
-        <!-- Kullanıcı durumu burada dinamik olarak güncellenecek -->
-      </div>
-    </div>
-  </nav>
+<body>
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
 
-  <!-- Admin Panel -->
-  <section class="container mx-auto my-8">
-    <h2 class="text-3xl font-bold mb-4">Yönetim Paneli</h2>
-    <!-- Current Room Info (for editing) -->
-    <div id="currentRoomInfo" class="bg-white p-6 rounded shadow mb-8 hidden">
-      <h3 class="text-xl font-bold mb-4">Mevcut Oda Bilgileri</h3>
-      <p><strong>Oda Adı:</strong> <span id="currentRoomName"></span></p>
-      <p><strong>Fiyat (Gece):</strong> <span id="currentRoomPrice"></span> TL</p>
-      <p><strong>Kişi Sayısı:</strong> <span id="currentRoomCapacity"></span></p>
-      <p><strong>Açıklama:</strong> <span id="currentRoomDescription"></span></p>
-      <p><strong>Görsel:</strong></p>
-      <img id="currentRoomImage" class="w-32 h-32 object-cover mt-2" alt="Mevcut Oda Görseli">
+    <!-- Sidebar -->
+    <div class="sidebar sidebar-glass fixed left-0 top-0 h-full w-64 z-50" id="sidebar">
+        <div class="p-6">
+            <div class="flex items-center mb-8">
+                <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full flex items-center justify-center text-white font-bold mr-3">
+                    🏨
+                </div>
+                <div>
+                    <h2 class="text-lg font-bold text-white">Admin Panel</h2>
+                    <p class="text-sm text-gray-300">Celestial Resort</p>
+                </div>
+            </div>
+            
+            <nav>
+                <a href="#" class="sidebar-item active" onclick="showSection('dashboard')">
+                    <i>📊</i> Dashboard
+                </a>
+                <a href="#" class="sidebar-item" onclick="showSection('rooms')">
+                    <i>🏨</i> Oda Yönetimi
+                </a>
+                <a href="#" class="sidebar-item" onclick="showSection('reservations')">
+                    <i>📅</i> Rezervasyonlar
+                </a>
+                <a href="#" class="sidebar-item" onclick="showSection('pending')">
+                    <i>⏳</i> Bekleyen Onaylar
+                </a>
+                <a href="#" class="sidebar-item" onclick="showSection('settings')">
+                    <i>⚙️</i> Ayarlar
+                </a>
+                <a href="index.html" class="sidebar-item" style="margin-top: 20px; border-top: 1px solid rgba(250, 248, 245, 0.2); padding-top: 20px;">
+                    <i>🏠</i> Ana Siteye Dön
+                </a>
+            </nav>
+        </div>
     </div>
-    <!-- Add/Edit Room -->
-    <div class="bg-white p-6 rounded shadow mb-8">
-      <h3 class="text-xl font-bold mb-4">Oda Ekle/Düzenle</h3>
-      <form id="roomForm">
-        <input type="hidden" id="roomId">
-        <div class="mb-4">
-          <label class="block mb-1">Oda Adı:</label>
-          <input type="text" id="roomName" class="border p-2 w-full">
-        </div>
-        <div class="mb-4">
-          <label class="block mb-1">Fiyat (Gece):</label>
-          <input type="number" id="roomPrice" class="border p-2 w-full">
-        </div>
-        <div class="mb-4">
-          <label class="block mb-1">Kişi Sayısı:</label>
-          <input type="number" id="roomCapacity" class="border p-2 w-full">
-        </div>
-        <div class="mb-4">
-          <label class="block mb-1">Açıklama:</label>
-          <textarea id="roomDescription" class="border p-2 w-full"></textarea>
-        </div>
-        <div class="mb-4">
-          <label class="block mb-1">Oda Görseli:</label>
-          <input type="file" id="roomImage" accept="image/*" class="border p-2 w-full">
-          <img id="imagePreview" class="hidden w-32 h-32 object-cover mt-2" alt="Yeni Görsel Önizleme">
-        </div>
-        <button type="button" onclick="saveRoom()" class="btn-primary mr-2">Kaydet</button>
-        <button type="button" onclick="resetRoomForm()" class="btn-primary">Sıfırla</button>
-      </form>
-    </div>
-    <!-- Reservation List -->
-    <div class="bg-white p-6 rounded shadow">
-      <h3 class="text-xl font-bold mb-4">Kullanıcı Rezervasyonları</h3>
-      <div id="reservationList"></div>
-    </div>
-  </section>
 
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container mx-auto">
-      <p>© 2025 Celestial Resort Otel. Tüm hakları saklıdır.</p>
-    </div>
-  </footer>
+    <!-- Main Content -->
+    <div class="main-content ml-64 p-6" id="mainContent">
+        
+        <!-- Dashboard Section -->
+        <div id="dashboard-section" class="section">
+            <div class="admin-header">
+                <h1 class="text-3xl font-bold text-primary mb-2">Admin Dashboard</h1>
+                <p class="text-gray-600">Celestial Resort yönetim paneline hoş geldiniz</p>
+            </div>
 
-  <script src="scripts.js"></script>
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="stats-card">
+                    <div class="text-3xl mb-2">🏨</div>
+                    <h3 class="text-2xl font-bold text-primary mb-1">24</h3>
+                    <p class="text-gray-600">Toplam Oda</p>
+                </div>
+                <div class="stats-card">
+                    <div class="text-3xl mb-2">📅</div>
+                    <h3 class="text-2xl font-bold text-primary mb-1">18</h3>
+                    <p class="text-gray-600">Aktif Rezervasyon</p>
+                </div>
+                <div class="stats-card">
+                    <div class="text-3xl mb-2">⏳</div>
+                    <h3 class="text-2xl font-bold text-primary mb-1">5</h3>
+                    <p class="text-gray-600">Bekleyen Onay</p>
+                </div>
+                <div class="stats-card">
+                    <div class="text-3xl mb-2">💰</div>
+                    <h3 class="text-2xl font-bold text-primary mb-1">₺47,250</h3>
+                    <p class="text-gray-600">Bu Ay Gelir</p>
+                </div>
+            </div>
+
+            <!-- Recent Activity -->
+            <div class="card">
+                <h2 class="text-xl font-bold text-primary mb-4">Son Aktiviteler</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between p-3 bg-blue-50 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm mr-3">📅</div>
+                            <div>
+                                <p class="font-semibold">Yeni rezervasyon alındı</p>
+                                <p class="text-sm text-gray-600">Deluxe Suite - Ahmet Yılmaz</p>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-500">5 dk önce</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm mr-3">✅</div>
+                            <div>
+                                <p class="font-semibold">Rezervasyon onaylandı</p>
+                                <p class="text-sm text-gray-600">Standard Room - Fatma Özkan</p>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-500">15 dk önce</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-yellow-50 rounded-lg">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-white text-sm mr-3">🛏️</div>
+                            <div>
+                                <p class="font-semibold">Oda güncellendi</p>
+                                <p class="text-sm text-gray-600">Presidential Suite - Fiyat değişikliği</p>
+                            </div>
+                        </div>
+                        <span class="text-sm text-gray-500">1 saat önce</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rooms Section -->
+        <div id="rooms-section" class="section" style="display: none;">
+            <div class="admin-header">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h1 class="text-3xl font-bold text-primary mb-2">Oda Yönetimi</h1>
+                        <p class="text-gray-600">Odaları görüntüleyin, düzenleyin ve yönetin</p>
+                    </div>
+                    <button class="btn-primary" onclick="showAddRoomModal()">
+                        ➕ Yeni Oda Ekle
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Oda</th>
+                            <th>Tip</th>
+                            <th>Fiyat/Gece</th>
+                            <th>Kapasite</th>
+                            <th>Durum</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody id="roomsTableBody">
+                        <tr>
+                            <td>
+                                <div class="flex items-center">
+                                    <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=80&h=60&fit=crop" alt="Room" class="room-image mr-3">
+                                    <div>
+                                        <p class="font-semibold">101</p>
+                                        <p class="text-sm text-gray-600">Standard Room</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Standard</td>
+                            <td>₺1,200</td>
+                            <td>2 Kişi</td>
+                            <td><span class="status-badge status-confirmed">Müsait</span></td>
+                            <td>
+                                <button class="btn-edit mr-2" onclick="editRoom(1)">✏️ Düzenle</button>
+                                <button class="btn-danger" onclick="deleteRoom(1)">🗑️ Sil</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="flex items-center">
+                                    <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=80&h=60&fit=crop" alt="Room" class="room-image mr-3">
+                                    <div>
+                                        <p class="font-semibold">201</p>
+                                        <p class="text-sm text-gray-600">Deluxe Suite</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Deluxe Suite</td>
+                            <td>₺2,500</td>
+                            <td>4 Kişi</td>
+                            <td><span class="status-badge status-pending">Dolu</span></td>
+                            <td>
+                                <button class="btn-edit mr-2" onclick="editRoom(2)">✏️ Düzenle</button>
+                                <button class="btn-danger" onclick="deleteRoom(2)">🗑️ Sil</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="flex items-center">
+                                    <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=80&h=60&fit=crop" alt="Room" class="room-image mr-3">
+                                    <div>
+                                        <p class="font-semibold">301</p>
+                                        <p class="text-sm text-gray-600">Presidential Suite</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Presidential</td>
+                            <td>₺5,000</td>
+                            <td>6 Kişi</td>
+                            <td><span class="status-badge status-confirmed">Müsait</span></td>
+                            <td>
+                                <button class="btn-edit mr-2" onclick="editRoom(3)">✏️ Düzenle</button>
+                                <button class="btn-danger" onclick="deleteRoom(3)">🗑️ Sil</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Reservations Section -->
+        <div id="reservations-section" class="section" style="display: none;">
+            <div class="admin-header">
+                <h1 class="text-3xl font-bold text-primary mb-2">Tüm Rezervasyonlar</h1>
+                <p class="text-gray-600">Onaylanmış ve tamamlanmış rezervasyonları görüntüleyin</p>
+            </div>
+
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Rezervasyon ID</th>
+                            <th>Müşteri</th>
+                            <th>Oda</th>
+                            <th>Check-in</th>
+                            <th>Check-out</th>
+                            <th>Tutar</th>
+                            <th>Durum</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#RES001</td>
+                            <td>
+                                <div>
+                                    <p class="font-semibold">Ahmet Yılmaz</p>
+                                    <p class="text-sm text-gray-600">ahmet@email.com</p>
+                                </div>
+                            </td>
+                            <td>Standard Room 101</td>
+                            <td>15.06.2025</td>
+                            <td>18.06.2025</td>
+                            <td>₺3,600</td>
+                            <td><span class="status-badge status-confirmed">Onaylandı</span></td>
+                            <td>
+                                <button class="btn-edit mr-2" onclick="viewReservation('RES001')">👁️ Görüntüle</button>
+                                <button class="btn-danger" onclick="cancelReservation('RES001')">❌ İptal</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#RES002</td>
+                            <td>
+                                <div>
+                                    <p class="font-semibold">Fatma Özkan</p>
+                                    <p class="text-sm text-gray-600">fatma@email.com</p>
+                                </div>
+                            </td>
+                            <td>Deluxe Suite 201</td>
+                            <td>20.06.2025</td>
+                            <td>25.06.2025</td>
+                            <td>₺12,500</td>
+                            <td><span class="status-badge status-confirmed">Onaylandı</span></td>
+                            <td>
+                                <button class="btn-edit mr-2" onclick="viewReservation('RES002')">👁️ Görüntüle</button>
+                                <button class="btn-danger" onclick="cancelReservation('RES002')">❌ İptal</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>#RES003</td>
+                            <td>
+                                <div>
+                                    <p class="font-semibold">Mehmet Kaya</p>
+                                    <p class="text-sm text-gray-600">mehmet@email.com</p>
+                                </div>
+                            </td>
+                            <td>Presidential Suite 301</td>
+                            <td>01.07.2025</td>
+                            <td>05.07.2025</td>
+                            <td>₺20,000</td>
+                            <td><span class="status-badge status-cancelled">İptal Edildi</span></td>
+                            <td>
+                                <button class="btn-edit mr-2" onclick="viewReservation('RES003')">👁️ Görüntüle</button>
+                                <button class="btn-success" onclick="reactivateReservation('RES003')">🔄 Yeniden Aktif</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pending Reservations Section -->
+        <div id="pending-section" class="section" style="display: none;">
+            <div class="admin-header">
+                <h1 class="text-3xl font-bold text-primary mb-2">Bekleyen Onaylar</h1>
+                <p class="text-gray-600">Onay bekleyen rezervasyonları inceleyin ve işlem yapın</p>
+            </div>
+
+            <div class="grid gap-6">
+                <div class="card">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-primary">#RES004 - Ayşe Demir</h3>
+                            <p class="text-gray-600">ayse@email.com | 0532 123 45 67</p>
+                        </div>
+                        <span class="status-badge status-pending">Bekliyor</span>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <p><strong>Oda:</strong> Deluxe Suite 202</p>
+                            <p><strong>Check-in:</strong> 10.07.2025</p>
+                            <p><strong>Check-out:</strong> 15.07.2025</p>
+                        </div>
+                        <div>
+                            <p><strong>Misafir Sayısı:</strong> 2 Yetişkin</p>
+                            <p><strong>Toplam Tutar:</strong> ₺12,500</p>
+                            <p><strong>Özel İstek:</strong> Balayı paketi</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-3">
+                        <button class="btn-success" onclick="approveReservation('RES004')">✅ Onayla</button>
+                        <button class="btn-danger" onclick="rejectReservation('RES004')">❌ Reddet</button>
+                        <button class="btn-edit" onclick="contactCustomer('RES004')">📞 Müşteriyi Ara</button>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-primary">#RES005 - Can Şahin</h3>
+                            <p class="text-gray-600">can@email.com | 0533 987 65 43</p>
+                        </div>
+                        <span class="status-badge status-pending">Bekliyor</span>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <p><strong>Oda:</strong> Presidential Suite 301</p>
+                            <p><strong>Check-in:</strong> 20.07.2025</p>
+                            <p><strong>Check-out:</strong> 23.07.2025</p>
+                        </div>
+                        <div>
+                            <p><strong>Misafir Sayısı:</strong> 4 Yetişkin, 2 Çocuk</p>
+                            <p><strong>Toplam Tutar:</strong> ₺15,000</p>
+                            <p><strong>Özel İstek:</strong> Erken check-in</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-3">
+                        <button class="btn-success" onclick="approveReservation('RES005')">✅ Onayla</button>
+                        <button class="btn-danger" onclick="rejectReservation('RES005')">❌ Reddet</button>
+                        <button class="btn-edit" onclick="contactCustomer('RES005')">📞 Müşteriyi Ara</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div id="settings-section" class="section" style="display: none;">
+            <div class="admin-header">
+                <h1 class="text-3xl font-bold text-primary mb-2">Sistem Ayarları</h1>
+                <p class="text-gray-600">Otel yönetim ayarlarını düzenleyin</p>
+            </div>
+
+            <div class="grid gap-6">
+                <div class="card">
+                    <h3 class="text-lg font-bold text-primary mb-4">Genel Ayarlar</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="form-group">
+                            <label class="form-label">Otel Adı</label>
+                            <input type="text" class="form-control" value="Celestial Resort Otel">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Check-in Saati</label>
+                            <input type="time" class="form-control" value="14:00">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Check-out Saati</label>
+                            <input type="time" class="form-control" value="11:00">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Rezervasyon Onay Süresi</label>
+                            <select class="form-control">
+                                <option value="24">24 Saat</option>
+                                <option value="48" selected>48 Saat</option>
+                                <option value="72">72 Saat</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-lg font-bold text-primary mb-4">Bildirim Ayarları</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-semibold">Yeni Rezervasyon Bildirimi</p>
+                                <p class="text-sm text-gray-600">Yeni rezervasyon geldiğinde e-posta gönder</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-semibold">Check-in Hatırlatması</p>
+                                <p class="text-sm text-gray-600">Check-in gününden 1 gün önce müşteriye hatırlatma gönder</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox" checked>
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="font-semibold">Otomatik Onay</p>
+                                <p class="text-sm text-gray-600">Belirli koşullarda rezervasyonları otomatik onayla</p>
+                            </div>
+                            <label class="switch">
+                                <input type="checkbox">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-lg font-bold text-primary mb-4">Fiyatlandırma</h3>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="form-group">
+                            <label class="form-label">Erken Check-in Ücreti</label>
+                            <input type="number" class="form-control" value="150" placeholder="₺">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Geç Check-out Ücreti</label>
+                            <input type="number" class="form-control" value="200" placeholder="₺">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">İptal Ücreti (%)</label>
+                            <input type="number" class="form-control" value="20" placeholder="%">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button class="btn-primary" onclick="saveSettings()">💾 Ayarları Kaydet</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Room Modal -->
+    <div id="roomModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-primary" id="roomModalTitle">Yeni Oda Ekle</h2>
+                <button onclick="closeModal('roomModal')" class="text-2xl text-gray-500 hover:text-gray-700">&times;</button>
+            </div>
+            <form id="roomForm">
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="form-group">
+                        <label class="form-label">Oda Numarası</label>
+                        <input type="text" id="roomNumber" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Oda Tipi</label>
+                        <select id="roomType" class="form-control" required>
+                            <option value="">Seçiniz</option>
+                            <option value="Standard">Standard Room</option>
+                            <option value="Deluxe">Deluxe Suite</option>
+                            <option value="Presidential">Presidential Suite</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fiyat (₺/Gece)</label>
+                        <input type="number" id="roomPrice" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Kapasite</label>
+                        <input type="number" id="roomCapacity" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Oda Açıklaması</label>
+                    <textarea id="roomDescription" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Oda Görseli URL</label>
+                    <input type="url" id="roomImage" class="form-control">
+                </div>
+                <div class="flex justify-end space-x-3">
+                    <button type="button" class="btn-secondary" onclick="closeModal('roomModal')">İptal</button>
+                    <button type="submit" class="btn-primary">💾 Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reservation Details Modal -->
+    <div id="reservationModal" class="modal">
+        <div class="modal-content">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-primary">Rezervasyon Detayları</h2>
+                <button onclick="closeModal('reservationModal')" class="text-2xl text-gray-500 hover:text-gray-700">&times;</button>
+            </div>
+            <div id="reservationDetails">
+                <!-- Rezervasyon detayları buraya yüklenecek -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let currentSection = 'dashboard';
+        let rooms = [
+            {id: 1, number: '101', type: 'Standard', price: 1200, capacity: 2, status: 'available', image: 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=80&h=60&fit=crop'},
+            {id: 2, number: '201', type: 'Deluxe Suite', price: 2500, capacity: 4, status: 'occupied', image: 'https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=80&h=60&fit=crop'},
+            {id: 3, number: '301', type: 'Presidential', price: 5000, capacity: 6, status: 'available', image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=80&h=60&fit=crop'}
+        ];
+
+        // Navigation functions
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName + '-section').style.display = 'block';
+            document.getElementById(sectionName + '-section').classList.add('fade-in');
+            
+            // Update active sidebar item
+            document.querySelectorAll('.sidebar-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            currentSection = sectionName;
+            
+            // Close mobile sidebar
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.remove('active');
+            }
+        }
+
+        function toggleSidebar() {
+            document.getElementById('sidebar').classList.toggle('active');
+        }
+
+        // Modal functions
+        function showModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Room management functions
+        function showAddRoomModal() {
+            document.getElementById('roomModalTitle').textContent = 'Yeni Oda Ekle';
+            document.getElementById('roomForm').reset();
+            showModal('roomModal');
+        }
+
+        function editRoom(roomId) {
+            const room = rooms.find(r => r.id === roomId);
+            if (room) {
+                document.getElementById('roomModalTitle').textContent = 'Oda Düzenle';
+                document.getElementById('roomNumber').value = room.number;
+                document.getElementById('roomType').value = room.type;
+                document.getElementById('roomPrice').value = room.price;
+                document.getElementById('roomCapacity').value = room.capacity;
+                document.getElementById('roomImage').value = room.image;
+                showModal('roomModal');
+            }
+        }
+
+        function deleteRoom(roomId) {
+            if (confirm('Bu odayı silmek istediğinize emin misiniz?')) {
+                rooms = rooms.filter(r => r.id !== roomId);
+                updateRoomsTable();
+                showNotification('Oda başarıyla silindi', 'success');
+            }
+        }
+
+        function updateRoomsTable() {
+            const tbody = document.getElementById('roomsTableBody');
+            tbody.innerHTML = '';
+            
+            rooms.forEach(room => {
+                const statusClass = room.status === 'available' ? 'status-confirmed' : 'status-pending';
+                const statusText = room.status === 'available' ? 'Müsait' : 'Dolu';
+                
+                tbody.innerHTML += `
+                    <tr>
+                        <td>
+                            <div class="flex items-center">
+                                <img src="${room.image}" alt="Room" class="room-image mr-3">
+                                <div>
+                                    <p class="font-semibold">${room.number}</p>
+                                    <p class="text-sm text-gray-600">${room.type}</p>
+                                </div>
+                            </div>
+                        </td>
+                        <td>${room.type}</td>
+                        <td>₺${room.price.toLocaleString()}</td>
+                        <td>${room.capacity} Kişi</td>
+                        <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                        <td>
+                            <button class="btn-edit mr-2" onclick="editRoom(${room.id})">✏️ Düzenle</button>
+                            <button class="btn-danger" onclick="deleteRoom(${room.id})">🗑️ Sil</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        // Reservation management functions
+        function approveReservation(reservationId) {
+            if (confirm('Bu rezervasyonu onaylamak istediğinize emin misiniz?')) {
+                showNotification(`Rezervasyon ${reservationId} onaylandı`, 'success');
+                // Bu noktada API çağrısı yapılabilir
+            }
+        }
+
+        function rejectReservation(reservationId) {
+            const reason = prompt('Rezervasyon red nedeni:');
+            if (reason) {
+                showNotification(`Rezervasyon ${reservationId} reddedildi`, 'danger');
+                // Bu noktada API çağrısı yapılabilir
+            }
+        }
+
+        function cancelReservation(reservationId) {
+            if (confirm('Bu rezervasyonu iptal etmek istediğinize emin misiniz?')) {
+                showNotification(`Rezervasyon ${reservationId} iptal edildi`, 'danger');
+                // Bu noktada API çağrısı yapılabilir
+            }
+        }
+
+        function reactivateReservation(reservationId) {
+            if (confirm('Bu rezervasyonu yeniden aktif hale getirmek istediğinize emin misiniz?')) {
+                showNotification(`Rezervasyon ${reservationId} yeniden aktif edildi`, 'success');
+                // Bu noktada API çağrısı yapılabilir
+            }
+        }
+
+        function viewReservation(reservationId) {
+            // Rezervasyon detaylarını modal içinde göster
+            document.getElementById('reservationDetails').innerHTML = `
+                <div class="space-y-4">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold text-primary mb-2">Müşteri Bilgileri</h4>
+                            <p><strong>Ad Soyad:</strong> Ahmet Yılmaz</p>
+                            <p><strong>E-posta:</strong> ahmet@email.com</p>
+                            <p><strong>Telefon:</strong> 0532 123 45 67</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-primary mb-2">Rezervasyon Bilgileri</h4>
+                            <p><strong>Rezervasyon ID:</strong> ${reservationId}</p>
+                            <p><strong>Oda:</strong> Standard Room 101</p>
+                            <p><strong>Tarih:</strong> 15.06.2025 - 18.06.2025</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-primary mb-2">Ödeme Bilgileri</h4>
+                        <p><strong>Toplam Tutar:</strong> ₺3,600</p>
+                        <p><strong>Ödeme Durumu:</strong> <span class="status-badge status-confirmed">Ödendi</span></p>
+                    </div>
+                    <div class="flex space-x-3 pt-4">
+                        <button class="btn-primary" onclick="sendEmail('${reservationId}')">📧 E-posta Gönder</button>
+                        <button class="btn-edit" onclick="printReservation('${reservationId}')">🖨️ Yazdır</button>
+                    </div>
+                </div>
+            `;
+            showModal('reservationModal');
+        }
+
+        function contactCustomer(reservationId) {
+            alert(`${reservationId} rezervasyonu için müşteri ile iletişime geçiliyor...`);
+        }
+
+        // Utility functions
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 p-4 rounded-lg text-white z-50 ${
+                type === 'success' ? 'bg-green-500' : 
+                type === 'danger' ? 'bg-red-500' : 
+                'bg-blue-500'
+            }`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        function saveSettings() {
+            showNotification('Ayarlar başarıyla kaydedildi', 'success');
+        }
+
+        function sendEmail(reservationId) {
+            showNotification(`${reservationId} için e-posta gönderildi`, 'success');
+        }
+
+        function printReservation(reservationId) {
+            window.print();
+        }
+
+        // Form submission handlers
+        document.getElementById('roomForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const roomData = {
+                id: Date.now(), // Temporary ID
+                number: document.getElementById('roomNumber').value,
+                type: document.getElementById('roomType').value,
+                price: parseInt(document.getElementById('roomPrice').value),
+                capacity: parseInt(document.getElementById('roomCapacity').value),
+                status: 'available',
+                image: document.getElementById('roomImage').value || 'https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=80&h=60&fit=crop'
+            };
+            
+            rooms.push(roomData);
+            updateRoomsTable();
+            closeModal('roomModal');
+            showNotification('Oda başarıyla eklendi', 'success');
+        });
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Responsive sidebar handling
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                document.getElementById('sidebar').classList.remove('active');
+            }
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            updateRoomsTable();
+        });
+    </script>
+
+    <style>
+        /* Switch toggle styling */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* Additional button styling */
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #8F7A7E 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(166, 139, 143, 0.4);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(250, 248, 245, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(139, 79, 138, 0.3);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 79, 138, 0.5);
+        }
+    </style>
 </body>
 </html>
