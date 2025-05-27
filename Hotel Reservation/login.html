@@ -300,6 +300,17 @@
             font-weight: 600;
         }
 
+        .admin-message {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: #B8860B;
+            padding: 12px 18px;
+            border-radius: 15px;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+
         @media (max-width: 768px) {
             .login-card {
                 margin: 1rem;
@@ -414,11 +425,12 @@
         // User database - In memory storage for demo purposes
         let users = [];
 
-        // Initialize with some demo users for testing
+        // Initialize with admin user
         users.push({
-            name: "Demo Kullanıcı",
-            email: "demo@celestial.com",
-            password: "123456"
+            name: "Admin",
+            email: "admin@celestial.com",
+            password: "admin0",
+            role: "admin"
         });
 
         // Particle animation (same as index.html)
@@ -468,7 +480,14 @@
         // Show message function
         function showMessage(message, type = 'success') {
             const messageArea = document.getElementById('messageArea');
-            const messageClass = type === 'success' ? 'success-message' : 'error-message';
+            let messageClass = 'success-message';
+            
+            if (type === 'error') {
+                messageClass = 'error-message';
+            } else if (type === 'admin') {
+                messageClass = 'admin-message';
+            }
+            
             messageArea.innerHTML = `<div class="${messageClass}">${message}</div>`;
             
             // Auto-hide after 5 seconds
@@ -493,7 +512,7 @@
             return emailRegex.test(email);
         }
 
-        // Login function with real authentication
+        // Login function with admin check
         function login() {
             const email = document.getElementById('loginEmail').value.trim();
             const password = document.getElementById('loginPassword').value;
@@ -523,11 +542,29 @@
                 return;
             }
             
-            // Successful login
+            // Check if user is admin
+            if (user.role === 'admin' && email.toLowerCase() === 'admin@celestial.com') {
+                showMessage('Admin olarak giriş yapılıyor...', 'admin');
+                
+                // Store admin info
+                const adminData = btoa(JSON.stringify({
+                    name: user.name,
+                    email: user.email,
+                    role: user.role,
+                    loginTime: new Date().toISOString()
+                }));
+                
+                // Redirect to admin panel after 2 seconds
+                setTimeout(() => {
+                    window.location.href = `admin.html?user=${adminData}`;
+                }, 2000);
+                return;
+            }
+            
+            // Regular user login
             showMessage(`Hoş geldiniz ${user.name}! Giriş başarılı.`);
             
-            // Store current user info in a way that persists across pages
-            // Since we can't use localStorage, we'll use URL parameters
+            // Store current user info
             const userData = btoa(JSON.stringify({
                 name: user.name,
                 email: user.email,
@@ -567,6 +604,12 @@
                 return;
             }
 
+            // Prevent admin email registration
+            if (email.toLowerCase() === 'admin@celestial.com') {
+                showMessage('Bu e-posta adresi sistem tarafından rezerve edilmiştir.', 'error');
+                return;
+            }
+
             // Check if email already exists
             if (emailExists(email)) {
                 showMessage('Bu e-posta adresi ile zaten kayıtlı bir hesap bulunmaktadır.', 'error');
@@ -578,6 +621,7 @@
                 name: name,
                 email: email,
                 password: password,
+                role: 'user',
                 registrationDate: new Date().toISOString()
             };
             
@@ -600,7 +644,7 @@
         // Show current registered users count (for demo purposes)
         function showUserStats() {
             console.log(`Toplam kayıtlı kullanıcı sayısı: ${users.length}`);
-            console.log('Kayıtlı kullanıcılar:', users.map(u => ({ name: u.name, email: u.email })));
+            console.log('Kayıtlı kullanıcılar:', users.map(u => ({ name: u.name, email: u.email, role: u.role || 'user' })));
         }
 
         // Form submission prevention
@@ -627,10 +671,10 @@
             }
         });
 
-        // Show demo user info on page load
+        // Show admin login info on page load
         window.addEventListener('load', function() {
             setTimeout(() => {
-                showMessage('Demo hesap: demo@celestial.com / 123456', 'success');
+                showMessage('Admin girişi: admin@celestial.com / admin0', 'admin');
             }, 1000);
         });
     </script>
